@@ -1,0 +1,178 @@
+<html>
+    <body>
+        <h1>
+            ICE BERG GAME
+        </h1>
+
+
+            <div class="gamezone" id="gameZone"></div> 
+
+            <div id="icebergdiv">
+                <img id="iceberg" src="photos/wordgame1.jpg">
+            </div>
+
+            
+            <table class="bottomleft">
+                
+
+                <tr>
+                    <td class="letter" onclick=showletter("A") style="height:50px;width:50px" id="A" >A</td>
+                    <td class="letter" onclick=showletter("B") style="height:50px;width:50px" id="B" >B</td>
+                    <td class="letter" onclick=showletter("C") style="height:50px;width:50px" id="C" >C</td>
+                    <td class="letter" onclick=showletter("D") style="height:50px;width:50px" id="D" >D</td>
+                    <td class="letter" onclick=showletter("E") style="height:50px;width:50px" id="E" >E</td>
+                    <td class="letter" onclick=showletter("F") style="height:50px;width:50px" id="F" >F</td>
+                    <td class="letter" onclick=showletter("G") style="height:50px;width:50px" id="G" >G</td>
+                    <td class="letter" onclick=showletter("H") style="height:50px;width:50px" id="H" >H</td>
+                    <td class="letter" onclick=showletter("I") style="height:50px;width:50px" id="I" >I</td>
+                    <td class="letter" onclick=showletter("J") style="height:50px;width:50px" id="J" >J</td>
+                    <td class="letter" onclick=showletter("K") style="height:50px;width:50px" id="K" >K</td>
+                    <td class="letter" onclick=showletter("L") style="height:50px;width:50px" id="L" >L</td>
+                    <td class="letter" onclick=showletter("M") style="height:50px;width:50px" id="M" >M</td>
+                </tr>
+                <tr>
+                    <td class="letter" onclick=showletter("N") style="height:50px;width:50px" id="N" >N</td>
+                    <td class="letter" onclick=showletter("O") style="height:50px;width:50px" id="O" >O</td>
+                    <td class="letter" onclick=showletter("P") style="height:50px;width:50px" id="P" >P</td>
+                    <td class="letter" onclick=showletter("Q") style="height:50px;width:50px" id="Q" >Q</td>
+                    <td class="letter" onclick=showletter("R") style="height:50px;width:50px" id="R" >R</td>
+                    <td class="letter" onclick=showletter("S") style="height:50px;width:50px" id="S" >S</td>
+                    <td class="letter" onclick=showletter("T") style="height:50px;width:50px" id="T" >T</td>
+                    <td class="letter" onclick=showletter("U") style="height:50px;width:50px" id="U" >U</td>
+                    <td class="letter" onclick=showletter("V") style="height:50px;width:50px" id="V" >V</td>
+                    <td class="letter" onclick=showletter("W") style="height:50px;width:50px" id="W" >W</td>
+                    <td class="letter" onclick=showletter("X") style="height:50px;width:50px" id="X" >X</td>
+                    <td class="letter" onclick=showletter("Y") style="height:50px;width:50px" id="Y" >Y</td>
+                    <td class="letter" onclick=showletter("Z") style="height:50px;width:50px" id="Z" >Z</td>
+                </tr>
+            </table>
+
+
+    </body>
+</html>
+
+<style>
+.gamezone
+{
+    margin-left: 40;
+}
+
+body
+{
+    background-color: rgb(73, 72, 72);
+}
+
+.letter
+{
+    text-align: center;
+    border: 3px solid rgb(113, 209, 238);
+    background-color: rgb(29, 160, 200);
+}
+
+
+.letter:hover
+{
+    background-color: rgb(35, 123, 150);
+}
+
+.bottomleft
+{
+    margin-left: 20;
+    margin-right: auto;
+    margin-top: 200xpx;
+    margin-bottom: 100px;
+    border: 3px solid rgb(74, 193, 230);
+}
+
+
+</style>
+
+<script>
+    var currentWord;
+    var currentWordLength;
+    var gameArray = Array("DOG", "WORD", "fight");
+    var currentWordArray = Array();
+    var statusArray = Array();
+    var status;
+    var level = 0;
+    incorrectGuess=0;
+
+    loadGame();
+
+    function loadGame()
+    {
+        currentWord = gameArray[level];
+        currentWordLength = currentWord.length;
+
+        for(i=0; i< currentWordLength; i++)
+        {
+            currentWordArray[i] = currentWord.charAt(i);
+            statusArray[i] = "_";
+            status = statusArray.join(" ");
+        }
+        document.getElementById("gameZone").innerHTML = status;
+        document.getElementById("gameZone").style.fontSize = "100px";
+        document.getElementById("gameZone").style.textAlign = "center";
+    }
+
+    function showletter(guess)
+    {
+        indicator=1;
+
+        for(i=0; i<currentWordLength; i++)
+        {
+            if(currentWordArray[i]==guess)
+            {
+                statusArray[i] = guess;
+                indicator = 2;
+            }
+        }
+        status = statusArray.join(" ");
+        document.getElementById("gameZone").innerHTML = status;
+        document.getElementById("gameZone").style.fontSize = "100px";
+        document.getElementById("gameZone").style.textAlign = "center";
+
+        document.getElementById(guess).style.backgroundColor ="red";
+        const element = document.getElementById(guess);
+        //element.disabled();
+
+        if (indicator==1)
+        {
+           incorrectGuess++;
+            meltIceberg();
+        }
+    }
+
+    function meltIceberg()
+    {
+        if(incorrectGuess==1)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame2.jpg";
+        }
+
+        if(incorrectGuess==2)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame3.jpg";
+        }
+
+        if(incorrectGuess==3)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame4.jpg";
+        }
+
+        if(incorrectGuess==4)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame5.jpg";
+            document.getElementById("icebergdiv").innerHTML = "<p>you got the word wrong</p><button class=resetbutton onclick=restart()>Retry</button><img id=iceberg src=photos/wordgame1.jpg>";
+            
+        }
+        
+
+    }
+
+    function restart()
+    {
+        location.reload();
+    }
+
+</script>
