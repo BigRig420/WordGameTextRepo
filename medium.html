@@ -1,0 +1,234 @@
+<html>
+    <body>
+        <h1>
+            MEDIUM
+        </h1>
+        
+        <center>
+            <div>
+                <h2>score</h2>
+                <h2 id="score">0</h2> 
+            </div>
+        </center>
+
+            <div class="gamezone" id="gameZone"></div> 
+
+            <div id="icebergdiv">
+                <img id="iceberg" src="photos/wordgame1.jpg">
+            </div>
+
+            
+            <table class="bottomleft">
+                
+
+                <tr>
+                    <td class="letter" onclick=showletter("a") style="height:50px;width:50px" id="a" >a</td>
+                    <td class="letter" onclick=showletter("b") style="height:50px;width:50px" id="b" >b</td>
+                    <td class="letter" onclick=showletter("c") style="height:50px;width:50px" id="c" >c</td>
+                    <td class="letter" onclick=showletter("d") style="height:50px;width:50px" id="d" >d</td>
+                    <td class="letter" onclick=showletter("e") style="height:50px;width:50px" id="e" >e</td>
+                    <td class="letter" onclick=showletter("f") style="height:50px;width:50px" id="f" >f</td>
+                    <td class="letter" onclick=showletter("g") style="height:50px;width:50px" id="g" >g</td>
+                    <td class="letter" onclick=showletter("h") style="height:50px;width:50px" id="h" >h</td>
+                    <td class="letter" onclick=showletter("i") style="height:50px;width:50px" id="i" >i</td>
+                    <td class="letter" onclick=showletter("j") style="height:50px;width:50px" id="j" >j</td>
+                    <td class="letter" onclick=showletter("k") style="height:50px;width:50px" id="k" >k</td>
+                    <td class="letter" onclick=showletter("l") style="height:50px;width:50px" id="l" >l</td>
+                    <td class="letter" onclick=showletter("m") style="height:50px;width:50px" id="m" >m</td>
+                </tr>
+                <tr>
+                    <td class="letter" onclick=showletter("n") style="height:50px;width:50px" id="n" >n</td>
+                    <td class="letter" onclick=showletter("o") style="height:50px;width:50px" id="o" >o</td>
+                    <td class="letter" onclick=showletter("p") style="height:50px;width:50px" id="p" >p</td>
+                    <td class="letter" onclick=showletter("q") style="height:50px;width:50px" id="p" >q</td>
+                    <td class="letter" onclick=showletter("r") style="height:50px;width:50px" id="r" >r</td>
+                    <td class="letter" onclick=showletter("s") style="height:50px;width:50px" id="s" >s</td>
+                    <td class="letter" onclick=showletter("t") style="height:50px;width:50px" id="t" >t</td>
+                    <td class="letter" onclick=showletter("u") style="height:50px;width:50px" id="u" >u</td>
+                    <td class="letter" onclick=showletter("v") style="height:50px;width:50px" id="v" >v</td>
+                    <td class="letter" onclick=showletter("w") style="height:50px;width:50px" id="w" >w</td>
+                    <td class="letter" onclick=showletter("x") style="height:50px;width:50px" id="x" >x</td>
+                    <td class="letter" onclick=showletter("y") style="height:50px;width:50px" id="y" >y</td>
+                    <td class="letter" onclick=showletter("z") style="height:50px;width:50px" id="z" >z</td>
+                </tr>
+            </table>
+
+
+    </body>
+</html>
+
+<style>
+.gamezone
+{
+    margin-left: 40;
+}
+
+body
+{
+    background-color: rgb(73, 72, 72);
+}
+
+.letter
+{
+    text-align: center;
+    border: 3px solid rgb(113, 209, 238);
+    background-color: rgb(29, 160, 200);
+}
+
+
+.letter:hover
+{
+    background-color: rgb(35, 123, 150);
+}
+
+.bottomleft
+{
+    margin-left: 20;
+    margin-right: auto;
+    margin-top: 200xpx;
+    margin-bottom: 100px;
+    border: 3px solid rgb(74, 193, 230);
+}
+
+
+</style>
+
+<script>
+    var currentWord;
+    var currentWordLength;    
+    var currentWordArray = Array();
+    var statusArray = Array();
+    var status;
+    var correctGuess=0;
+    var incorrectGuess=0;
+    var level = 0;
+    var score=0;
+    var guess=0;
+    var indicator;
+    //var gameArray = Array("dog", "cat",	"run");
+    //var level = Math.floor(Math.random() * 2);
+
+
+    var gameArray = Array("about"	,"above"	,"abuse"	,"actor"	,"acute"	,"admit"	,"adopt"	,"adult"	,"after"	,"again"	,"agent"	,"agree"	,"ahead"	,"alarm"	,"album"	,"alert"	,"alike"	,"alive"	,"allow"	,"alone"	,"along"	,"alter"	,"among"	,"anger"	,"Angle"	,"angry"	,"apart"	,"apple"	,"apply"	,"arena"	,"argue"	,"arise"	,"array"	,"aside"	,"asset"	,"audio"	,"audit"	,"avoid"	,"award"	,"aware"	,"badly"	,"baker"	,"bases"	,"basic"	,"basis"	,"beach"	,"began"	,"begin"	,"begun"	,"being"	,"below"	,"bench"	,"billy"	,"birth"	,"black"	,"blame"	,"blind"	,"block"	,"blood"	,"board"	,"boost"	,"booth"	,"bound"	,"brain"	,"brand"	,"bread"	,"break"	,"breed"	,"brief"	,"bring"	,"broad"	,"broke"	,"brown"	,"build"	,"built"	,"buyer"	,"cable"	,"calif"	,"carry"	,"catch"	,"cause"	,"chain"	,"chair"	,"chart"	,"chase"	,"cheap"	,"check"	,"chest"	,"chief"	,"child"	,"china"	,"chose"	,"civil"	,"claim"	,"class"	,"clean"	,"clear"	,"click"	,"clock"	,"close"	,"coach"	,"coast"	,"could"	,"count"	,"court"	,"cover"	,"craft"	,"crash"	,"cream"	,"crime"	,"cross"	,"crowd"	,"crown"	,"curve"	,"cycle"	,"daily"	,"dance"	,"dated"	,"dealt"	,"death"	,"debut"	,"delay"	,"depth"	,"doing"	,"doubt"	,"dozen"	,"draft"	,"drama"	,"drawn"	,"dream"	,"dress"	,"drill"	,"drink"	,"drive"	,"drove"	,"dying"	,"eager"	,"early"	,"earth"	,"eight"	,"elite"	,"empty"	,"enemy"	,"enjoy"	,"enter"	,"entry"	,"equal"	,"error"	,"event"	,"every"	,"exact"	,"exist"	,"extra"	,"faith"	FALSE	,"fault"	,"fiber"	,"field"	,"fifth"	,"fifty"	,"fight"	,"final"	,"first"	,"fixed"	,"flash"	,"fleet"	,"floor"	,"fluid"	,"focus"	,"force"	,"forth"	,"forty"	,"forum"	,"found"	,"frame"	,"frank"	,"fraud"	,"fresh"	,"front"	,"fruit"	,"fully"	,"funny"	,"giant"	,"given"	,"glass"	,"globe"	,"going"	,"grace"	,"grade"	,"grand"	,"grant"	,"grass"	,"great"	,"green"	,"gross"	,"group"	,"grown"	,"guard"	,"guess"	,"guest"	,"guide"	,"happy"	,"harry"	,"heart"	,"heavy"	,"hence"	,"henry"	,"horse"	,"hotel"	,"house"	,"human"	,"ideal"	,"image"	,"index"	,"inner"	,"input"	,"issue"	,"japan"	,"jimmy"	,"joint"	,"jones"	,"judge"	,"known"	,"label"	,"large"	,"laser"	,"later"	,"laugh"	,"layer"	,"learn"	,"lease"	,"least"	,"leave"	,"legal"	,"level"	,"lewis"	,"light"	,"limit"	,"links"	,"lives"	,"local"	,"logic"	,"loose"	,"lower"	,"lucky"	,"lunch"	,"lying"	,"magic"	,"major"	,"maker"	,"march"	,"maria"	,"match"	,"maybe"	,"mayor"	,"meant"	,"media"	,"metal"	,"might"	,"minor"	,"minus"	,"mixed"	,"model"	,"money"	,"month"	,"moral"	,"motor"	,"mount"	,"mouse"	,"mouth"	,"movie"	,"music"	,"needs"	,"never"	,"newly"	,"night"	,"noise"	,"north"	,"noted"	,"novel"	,"nurse"	,"occur"	,"ocean"	,"offer"	,"often"	,"order"	,"other"	,"ought"	,"paint"	,"panel"	,"paper"	,"party"	,"peace"	,"peter"	,"phase"	,"phone"	,"photo"	,"piece"	,"pilot"	,"pitch"	,"place"	,"plain"	,"plane"	,"plant"	,"plate"	,"point"	,"pound"	,"power"	,"press"	,"price"	,"pride"	,"prime"	,"print"	,"prior"	,"prize"	,"proof"	,"proud"	,"prove"	,"queen"	,"quick"	,"quiet"	,"quite"	,"radio"	,"raise"	,"range"	,"rapid"	,"ratio"	,"reach"	,"ready"	,"refer"	,"right"	,"rival"	,"river"	,"robin"	,"roger"	,"roman"	,"rough"	,"round"	,"route"	,"royal"	,"rural"	,"scale"	,"scene"	,"scope"	,"score"	,"sense"	,"serve"	,"seven"	,"shall"	,"shape"	,"share"	,"sharp"	,"sheet"	,"shelf"	,"shell"	,"shift"	,"shirt"	,"shock"	,"shoot"	,"short"	,"shown"	,"sight"	,"since"	,"sixth"	,"sixty"	,"sized"	,"skill"	,"sleep"	,"slide"	,"small"	,"smart"	,"smile"	,"smith"	,"smoke"	,"solid"	,"solve"	,"sorry"	,"sound"	,"south"	,"space"	,"spare"	,"speak"	,"speed"	,"spend"	,"spent"	,"split"	,"spoke"	,"sport"	,"staff"	,"stage"	,"stake"	,"stand"	,"start"	,"state"	,"steam"	,"steel"	,"stick"	,"still"	,"stock"	,"stone"	,"stood"	,"store"	,"storm"	,"story"	,"strip"	,"stuck"	,"study"	,"stuff"	,"style"	,"sugar"	,"suite"	,"super"	,"sweet"	,"table"	,"taken"	,"taste"	,"taxes"	,"teach"	,"teeth"	,"terry"	,"texas"	,"thank"	,"theft"	,"their"	,"theme"	,"there"	,"these"	,"thick"	,"thing"	,"think"	,"third"	,"those"	,"three"	,"threw"	,"throw"	,"tight"	,"times"	,"tired"	,"title"	,"today"	,"topic"	,"total"	,"touch"	,"tough"	,"tower"	,"track"	,"trade"	,"train"	,"treat"	,"trend"	,"trial"	,"tried"	,"tries"	,"truck"	,"truly"	,"trust"	,"truth"	,"twice"	,"under"	,"undue"	,"union"	,"unity"	,"until"	,"upper"	,"upset"	,"urban"	,"usage"	,"usual"	,"valid"	,"value"	,"video"	,"virus"	,"visit"	,"vital"	,"voice"	,"waste"	,"watch"	,"water"	,"wheel"	,"where"	,"which"	,"while"	,"white"	,"whole"	,"whose"	,"woman"	,"women"	,"world"	,"worry"	,"worse"	,"worst"	,"worth"	,"would"	,"wound"	,"write"	,"wrong"	,"wrote"	,"yield"	,"young"	,"youth"	,"abroad"	,"accept"	,"access"	,"across"	,"acting"	,"action"	,"active"	,"actual"	,"advice"	,"advise"	,"affect"	,"afford"	,"afraid"	,"agency"	,"agenda"	,"almost"	,"always"	,"amount"	,"animal"	,"annual"	,"answer"	,"anyone"	,"anyway"	,"appeal"	,"appear"	,"around"	,"arrive"	,"artist"	,"aspect"	,"assess"	,"assist"	,"assume"	,"attack"	,"attend"	,"august"	,"author"	,"avenue"	,"backed"	,"barely"	,"battle"	,"beauty"	,"became"	,"become"	,"before"	,"behalf"	,"behind"	,"belief"	,"belong"	,"berlin"	,"better"	,"beyond"	,"bishop"	,"border"	,"bottle"	,"bottom"	,"bought"	,"branch"	,"breath"	,"bridge"	,"bright"	,"broken"	,"budget"	,"burden"	,"bureau"	,"button"	,"camera"	,"cancer"	,"cannot"	,"carbon"	,"career"	,"castle"	,"casual"	,"caught"	,"center"	,"centre"	,"chance"	,"change"	,"charge"	,"choice"	,"choose"	,"chosen"	,"church"	,"circle"	,"client"	,"closed"	,"closer"	,"coffee"	,"column"	,"combat"	,"coming"	,"common"	,"comply"	,"copper"	,"corner"	,"costly"	,"county"	,"couple"	,"course"	,"covers"	,"create"	,"credit"	,"crisis"	,"custom"	,"damage"	,"danger"	,"dealer"	,"debate"	,"decade"	,"decide"	,"defeat"	,"defend"	,"define"	,"degree"	,"demand"	,"depend"	,"deputy"	,"desert"	,"design"	,"desire"	,"detail"	,"detect"	,"device"	,"differ"	,"dinner"	,"direct"	,"doctor"	,"dollar"	,"domain"	,"double"	,"driven"	,"driver"	,"during"	,"easily"	,"eating"	,"editor"	,"effect"	,"effort"	,"eighth"	,"either"	,"eleven"	,"emerge"	,"empire"	,"employ"	,"enable"	,"ending"	,"energy"	,"engage"	,"engine"	,"enough"	,"ensure"	,"entire"	,"entity"	,"equity"	,"escape"	,"estate"	,"ethnic"	,"exceed"	,"except"	,"excess"	,"expand"	,"expect"	,"expert"	,"export"	,"extend"	,"extent"	,"fabric"	,"facing"	,"factor"	,"failed"	,"fairly"	,"fallen"	,"family"	,"famous"	,"father"	,"fellow"	,"female"	,"figure"	,"filing"	,"finger"	,"finish"	,"fiscal"	,"flight"	,"flying"	,"follow"	,"forced"	,"forest"	,"forget"	,"formal"	,"format"	,"former"	,"foster"	,"fought"	,"fourth"	,"French"	,"friend"	,"future"	,"garden"	,"gather"	,"gender"	,"german"	,"global"	,"golden"	,"ground"	,"growth"	,"guilty"	,"handed"	,"handle"	,"happen"	,"hardly"	,"headed"	,"health"	,"height"	,"hidden"	,"holder"	,"honest"	,"impact"	,"import"	,"income"	,"indeed"	,"injury"	,"inside"	,"intend"	,"intent"	,"invest"	,"island"	,"itself"	,"jersey"	,"joseph"	,"junior"	,"killed"	,"labour"	,"latest"	,"latter"	,"launch"	,"lawyer"	,"leader"	,"league"	,"leaves"	,"legacy"	,"length"	,"lesson"	,"letter"	,"lights"	,"likely"	,"linked"	,"liquid"	,"listen"	,"little"	,"living"	,"losing"	,"lucent"	,"luxury"	,"mainly"	,"making"	,"manage"	,"manner"	,"manual"	,"margin"	,"marine"	,"marked"	,"market"	,"martin"	,"master"	,"matter"	,"mature"	,"medium"	,"member"	,"memory"	,"mental"	,"merely"	,"merger"	,"method"	,"middle"	,"miller"	,"mining"	,"minute"	,"mirror"	,"mobile"	,"modern"	,"modest"	,"module"	,"moment"	,"morris"	,"mostly"	,"mother"	,"motion"	,"moving"	,"murder"	,"museum"	,"mutual"	,"myself"	,"narrow"	,"nation"	,"native"	,"nature"	,"nearby"	,"nearly"	,"nights"	,"nobody"	,"normal"	,"notice"	,"notion"	,"number"	,"object"	,"obtain"	,"office"	,"offset"	,"online"	,"option"	,"orange"	,"origin"	,"output"	,"oxford"	,"packed"	,"palace"	,"parent"	,"partly"	,"patent"	,"people"	,"period"	,"permit"	,"person"	,"phrase"	,"picked"	,"planet"	,"player"	,"please"	,"plenty"	,"pocket"	,"police"	,"policy"	,"prefer"	,"pretty"	,"prince"	,"prison"	,"profit"	,"proper"	,"proven"	,"public"	,"pursue"	,"raised"	,"random"	,"rarely"	,"rather"	,"rating"	,"reader"	,"really"	,"reason"	,"recall"	,"recent"	,"record"	,"reduce"	,"reform"	,"regard"	,"regime"	,"region"	,"relate"	,"relief"	,"remain"	,"remote"	,"remove"	,"repair"	,"repeat"	,"replay"	,"report"	,"rescue"	,"resort"	,"result"	,"retail"	,"retain"	,"return"	,"reveal"	,"review"	,"reward"	,"riding"	,"rising"	,"robust"	,"ruling"	,"safety"	,"salary"	,"sample"	,"saving"	,"saying"	,"scheme"	,"school"	,"screen"	,"search"	,"season"	,"second"	,"secret"	,"sector"	,"secure"	,"seeing"	,"select"	,"seller"	,"senior"	,"series"	,"server"	,"settle"	,"severe"	,"sexual"	,"should"	,"signal"	,"signed"	,"silent"	,"silver"	,"simple"	,"simply"	,"single"	,"sister"	,"slight"	,"smooth"	,"social"	,"solely"	,"sought"	,"source"	,"soviet"	,"speech"	,"spirit"	,"spoken"	,"spread"	,"spring"	,"square"	,"stable"	,"status"	,"steady"	,"stolen"	,"strain"	,"stream"	,"street"	,"stress"	,"strict"	,"strike"	,"string"	,"strong"	,"struck"	,"studio"	,"submit"	,"sudden"	,"suffer"	,"summer"	,"summit"	,"supply"	,"surely"	,"survey"	,"switch"	,"symbol"	,"system"	,"taking"	,"talent"	,"target"	,"taught"	,"tenant"	,"tender"	,"tennis"	,"thanks"	,"theory"	,"thirty"	,"though"	,"threat"	,"thrown"	,"ticket"	,"timely"	,"timing"	,"tissue"	,"toward"	,"travel"	,"treaty"	,"trying"	,"twelve"	,"twenty"	,"unable"	,"unique"	,"united"	,"unless"	,"unlike"	,"update"	,"useful"	,"valley"	,"varied"	,"vendor"	,"versus"	,"victim"	,"vision"	,"visual"	,"volume"	,"walker"	,"wealth"	,"weekly"	,"weight"	,"wholly"	,"window"	,"winner"	,"winter"	,"within"	,"wonder"	,"worker"	,"wright"	,"writer"	,"yellow");
+    var level = Math.floor(Math.random() * 118);
+
+    loadGame();
+
+    function loadGame()
+    {
+        currentWord = gameArray[level];
+        //alert(currentWord);
+        currentWordLength = currentWord.length;
+
+        for(i=0; i< currentWordLength; i++)
+        {
+            currentWordArray[i] = currentWord.charAt(i);
+            statusArray[i] = "_";
+            status = statusArray.join(" ");
+        }
+        alert(currentWordArray);
+        document.getElementById("gameZone").innerHTML = status;
+        document.getElementById("gameZone").style.fontSize = "100px";
+        document.getElementById("gameZone").style.textAlign = "center";
+    }
+
+    function showletter(guess)
+    {
+        //alert(guess);
+        indicator=1;
+
+        for(i=0; i<currentWordLength; i++)
+        {
+           // alert("in for loop");
+            if(currentWordArray[i]==guess)
+            {
+                alert("gotit");
+                statusArray[i] = guess;
+                correctGuess++;
+                indicator = 2;
+            }
+        }
+        status = statusArray.join(" ");
+        alert(status);
+        document.getElementById("gameZone").innerHTML = status;
+        document.getElementById("gameZone").style.fontSize = "100px";
+        document.getElementById("gameZone").style.textAlign = "center";
+
+        document.getElementById(guess).style.backgroundColor ="red";
+        const element = document.getElementById(guess);
+        //element.disabled();
+
+        if (indicator==1)
+        {
+           incorrectGuess++;
+            meltIceberg();
+        }
+
+        if (correctGuess==currentWordLength)
+        {
+            win();
+        }
+        document.getElementById("score").innerHTML = score;
+    }
+
+   
+
+    function win()
+    {
+        level++;
+        score++;
+        correctGuess=0;
+        incorrectGuess=0;
+        resetAlphabet();
+        statusArray.length = 0;
+        document.getElementById("iceberg").src="photos/wordgame1.jpg";
+        loadGame();
+    }
+
+    function resetAlphabet()
+    {
+        var thing = document.getElementsByClassName('letter');
+        
+        for (var i = 0; i < thing.length; i++)
+        {
+            thing[i].style.backgroundColor ="rgb(29, 160, 200)";
+            
+        }
+    }
+
+    function meltIceberg()
+    {
+        if(incorrectGuess==1)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame2.jpg";
+        }
+
+        if(incorrectGuess==2)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame3.jpg";
+        }
+
+        if(incorrectGuess==3)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame4.jpg";
+        }
+
+        if(incorrectGuess==4)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame5.jpg";
+        }
+
+        if(incorrectGuess==5)
+        {
+            document.getElementById("iceberg").src ="photos/wordgame6.jpg";
+            document.getElementById("icebergdiv").innerHTML = "<p>you got the word wrong</p><button class=resetbutton onclick=restart()>Retry</button><img id=iceberg src=photos/wordgame1.jpg>";
+            
+        } 
+    }
+
+    function restart()
+    {
+        location.reload();
+    }
+    
+</script>
